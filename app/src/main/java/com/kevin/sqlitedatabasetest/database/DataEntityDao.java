@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "DATA_ENTITY".
 */
-public class DataEntityDao extends AbstractDao<DataEntity, Void> {
+public class DataEntityDao extends AbstractDao<DataEntity, Long> {
 
     public static final String TABLENAME = "DATA_ENTITY";
 
@@ -22,8 +22,9 @@ public class DataEntityDao extends AbstractDao<DataEntity, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Name = new Property(0, String.class, "name", false, "NAME");
-        public final static Property Age = new Property(1, String.class, "age", false, "AGE");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Age = new Property(2, String.class, "age", false, "AGE");
     }
 
 
@@ -39,8 +40,9 @@ public class DataEntityDao extends AbstractDao<DataEntity, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DATA_ENTITY\" (" + //
-                "\"NAME\" TEXT," + // 0: name
-                "\"AGE\" TEXT);"); // 1: age
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"NAME\" TEXT," + // 1: name
+                "\"AGE\" TEXT);"); // 2: age
     }
 
     /** Drops the underlying database table. */
@@ -53,14 +55,19 @@ public class DataEntityDao extends AbstractDao<DataEntity, Void> {
     protected final void bindValues(DatabaseStatement stmt, DataEntity entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(1, name);
+            stmt.bindString(2, name);
         }
  
         String age = entity.getAge();
         if (age != null) {
-            stmt.bindString(2, age);
+            stmt.bindString(3, age);
         }
     }
 
@@ -68,52 +75,62 @@ public class DataEntityDao extends AbstractDao<DataEntity, Void> {
     protected final void bindValues(SQLiteStatement stmt, DataEntity entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(1, name);
+            stmt.bindString(2, name);
         }
  
         String age = entity.getAge();
         if (age != null) {
-            stmt.bindString(2, age);
+            stmt.bindString(3, age);
         }
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public DataEntity readEntity(Cursor cursor, int offset) {
         DataEntity entity = new DataEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // name
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // age
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // age
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, DataEntity entity, int offset) {
-        entity.setName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setAge(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setAge(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(DataEntity entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(DataEntity entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(DataEntity entity) {
-        return null;
+    public Long getKey(DataEntity entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(DataEntity entity) {
-        // TODO
-        return false;
+        return entity.getId() != null;
     }
 
     @Override

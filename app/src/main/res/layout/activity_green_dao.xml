@@ -1,7 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_retrieve_name"
+                style="@style/bg_edit_text"
+                android:hint="Text the name to retrieve" />
+
+            <Button
+                android:id="@+id/btn_retrieve_name"
+                style="@style/btn_style"
+                android:text="Retrieve" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_retrieve_age"
+                style="@style/bg_edit_text"
+                android:hint="Text the age to retrieve" />
+
+            <Button
+                android:id="@+id/btn_retrieve_age"
+                style="@style/btn_style"
+                android:text="Retrieve" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_update_name"
+                style="@style/bg_edit_text"
+                android:hint="Text the name to update" />
+
+            <EditText
+                android:id="@+id/et_update_age"
+                style="@style/bg_edit_text"
+                android:layout_below="@id/et_update_name"
+                android:layout_marginTop="10dp"
+                android:hint="Text the age in the database" />
+
+            <Button
+                android:id="@+id/btn_update_name"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/et_update_name"
+                android:background="@color/teal_2"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_delete_name"
+                style="@style/bg_edit_text"
+                android:hint="Text the name to delete" />
+
+            <Button
+                android:id="@+id/btn_delete_name"
+                style="@style/btn_style"
+                android:text="Delete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_delete_age"
+                style="@style/bg_edit_text"
+                android:hint="Text the age to delete" />
+
+            <Button
+                android:id="@+id/btn_delete_age"
+                style="@style/btn_style"
+                android:text="Delete" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_insert_name"
+                style="@style/bg_edit_text"
+                android:hint="Text the name to insert" />
+
+            <EditText
+                android:id="@+id/et_insert_age"
+                style="@style/bg_edit_text"
+                android:layout_below="@id/et_insert_name"
+                android:layout_marginTop="10dp"
+                android:hint="Text the name to insert" />
+
+            <Button
+                android:id="@+id/btn_insert"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/et_insert_name"
+                android:background="@color/teal_2"
+                android:text="Insert"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="NAME" />
+
+            <TextView
+                android:id="@+id/tv_age"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="AGE" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</ScrollView>
