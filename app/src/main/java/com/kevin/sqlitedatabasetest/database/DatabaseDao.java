@@ -78,13 +78,13 @@ public class DatabaseDao {
     }
 
     public void deleteName(String name) {
-        String sql = "delete from " + SQLITETABLE + " where name=" + name;
+        String sql = "delete from " + SQLITETABLE + " where name='" + name + "'";
         sqLiteDatabase = databaseHelper.getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
     }
 
     public void deleteAge(String age) {
-        String sql = "delete from " + SQLITETABLE + " where age=" + age+"";
+        String sql = "delete from " + SQLITETABLE + " where age=" + age + "";
         sqLiteDatabase = databaseHelper.getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
     }

@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_retrieve_age:
                 String retrieveAge = etRetrieveAge.getText().toString().toString();
                 if (!TextUtils.isEmpty(retrieveAge)) {
-                    List<DataBean> dataBeans = databaseDao.retrieveName(retrieveData, retrieveAge);
+                    List<DataBean> dataBeans = databaseDao.retrieveAge(retrieveData, retrieveAge);
                     mAdapter.showData(dataBeans);
                 } else {
                     Toast.makeText(this, "Please text the age", Toast.LENGTH_SHORT).show();

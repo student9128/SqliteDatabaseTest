@@ -78,7 +78,7 @@ public class GreenDaoActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_green_dao);
         ButterKnife.bind(this);
-        openDb();
+        createDb();
         btnInsert.setOnClickListener(this);
         btnUpdateName.setOnClickListener(this);
         btnRetrieveName.setOnClickListener(this);
@@ -91,7 +91,7 @@ public class GreenDaoActivity extends AppCompatActivity implements View.OnClickL
         rvRecyclerView.setAdapter(mAdapter);
     }
 
-    private void openDb() {
+    private void createDb() {
         mDevOpenHelper = new DaoMaster.DevOpenHelper(this, DB_NAME);
         mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
         mDaoSession = mDaoMaster.newSession();
